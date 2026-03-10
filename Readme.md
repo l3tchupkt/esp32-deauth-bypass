@@ -219,7 +219,7 @@ After applying the bypass and linker modification, the ESP32 can transmit **raw 
 * Disassociation frames
 * Authentication frames
 
-This technique is used in tools such as **ESP32 Marauder firmware**.
+This technique is used in tools such as **ESP32 Marauder firmware** and in my **NetSuck Firmware**.
 
 ---
 ![Author](https://img.shields.io/badge/Author-l3tchupkt-blue?style=for-the-badge&logo=github)
