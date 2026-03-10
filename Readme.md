@@ -149,11 +149,7 @@ Install both if unsure.
 
 ---
 
-# (Optional) Build Configuration Changes
-
-These steps are **only required if compiling the full ESP32 Marauder firmware from source**.
-
-If you are just using the bypass in your own sketch, you can skip this section.
+# Build Configuration Changes
 
 ---
 
