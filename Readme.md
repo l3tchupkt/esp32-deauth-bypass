@@ -222,8 +222,6 @@ After applying the bypass and linker modification, the ESP32 can transmit **raw 
 This technique is used in tools such as **ESP32 Marauder firmware**.
 
 ---
-
----
 ![Author](https://img.shields.io/badge/Author-l3tchupkt-blue?style=for-the-badge&logo=github)
 ![Tech](https://img.shields.io/badge/Hardware-ESP32-orange?style=for-the-badge)
 
