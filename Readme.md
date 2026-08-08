@@ -1,5 +1,7 @@
 # Sending Deauthentication Frames with ESP32 (Arduino IDE)
 
+<img width="1920" height="2560" alt="image" src="https://github.com/user-attachments/assets/ea3b5c69-a5f0-4034-a01e-8e31328f5b98" />
+
 ## Overview
 
 Sending **WiFi deauthentication frames** with the ESP32 is normally blocked by limitations in **Espressif's ESP-IDF**. These restrictions prevent raw frame injection for certain packet types such as:
