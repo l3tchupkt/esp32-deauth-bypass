@@ -231,13 +231,13 @@ The script unpacks the library archive, locates the `ieee80211_raw_frame_sanity_
 The script requires the path to the original `libnet80211.a`, the paths to the `objcopy` and `ar` toolchain binaries, and the output path for the patched library.
 
 ```bash
-python patch_wifi_lib.py <path_to_libnet80211.a> <path_to_objcopy> <path_to_ar> <output_libnet80211.a>
+python patch.py <path_to_libnet80211.a> <path_to_objcopy> <path_to_ar> <output_libnet80211.a>
 ```
 
 **Example:**
 ```bash
 # Locate your toolchain and library, then run:
-python patch_wifi_lib.py \
+python patch.py \
   /path/to/esp/esp-idf/components/esp_wifi/lib/esp32/libnet80211.a \
   /path/to/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-objcopy \
   /path/to/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-ar \
