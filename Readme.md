@@ -54,6 +54,14 @@ Testing shows the same internal sanity check still exists, allowing the bypass t
 
 # Bypassing `ieee80211_raw_frame_sanity_check`
 
+There are two primary methods to bypass this sanity check:
+1. **Linker Override** (Best for Arduino IDE)
+2. **Binary Patching** (Best for ESP-IDF native projects)
+
+---
+
+## Method 1: Linker Override (Arduino IDE)
+
 Add the following function to your firmware:
 
 ```cpp
@@ -206,6 +214,37 @@ Example:
 ```
 compiler.c.elf.libs.esp32=-zmuldefs
 ```
+
+---
+
+## Method 2: Binary Patching (ESP-IDF Native)
+
+For native ESP-IDF projects or environments where the linker trick is not feasible, you can directly patch the compiled ESP-IDF library (`libnet80211.a`) using the provided Python script `patch.py`.
+
+### How it works
+The script unpacks the library archive, locates the `ieee80211_raw_frame_sanity_check` function inside `ieee80211_output.o`, and modifies the assembly instructions at the beginning of the function (the prologue) to immediately return `0` (`ESP_OK`). 
+- **Xtensa targets:** Replaces the prologue with `movi.n a2, 0; retw.n`
+- **RISC-V targets:** Replaces the prologue with `li a0, 0; ret`
+
+### Usage
+
+The script requires the path to the original `libnet80211.a`, the paths to the `objcopy` and `ar` toolchain binaries, and the output path for the patched library.
+
+```bash
+python patch_wifi_lib.py <path_to_libnet80211.a> <path_to_objcopy> <path_to_ar> <output_libnet80211.a>
+```
+
+**Example:**
+```bash
+# Locate your toolchain and library, then run:
+python patch_wifi_lib.py \
+  /path/to/esp/esp-idf/components/esp_wifi/lib/esp32/libnet80211.a \
+  /path/to/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-objcopy \
+  /path/to/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-ar \
+  libnet80211_patched.a
+```
+
+After generating `libnet80211_patched.a`, replace the original library in your ESP-IDF installation with the patched one (make sure to back up the original first).
 
 ---
 
