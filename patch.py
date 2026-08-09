@@ -1,7 +1,5 @@
 
 """
-Patch ESP-IDF's libnet80211.a to allow raw TX of deauth/disassoc frames.
-
 The closed-source WiFi blob's ieee80211_raw_frame_sanity_check() rejects
 management frame subtypes 0xA0 (disassoc) and 0xC0 (deauth). This script
 patches the function body in ieee80211_output.o to return 0 (ESP_OK)
@@ -11,7 +9,6 @@ Supported targets:
 - Xtensa: replace the prologue with `movi.n a2, 0; retw.n`
 - RISC-V: replace the prologue with `li a0, 0; ret`
 
-Usage: patch.py <libnet80211.a> <objcopy> <ar> <output.a>
 """
 import sys, subprocess, shutil, tempfile, os
 
